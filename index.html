@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="google-site-verification" content="H28EoM5j4KUOkMWJzlHaV6tE6fEzj_f66PpRozIuAwQ" />
   <title>Monuments of India</title>
-  
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -353,10 +351,103 @@
         height:250px;
       }
     }
+    /* INTRO SCREEN */
+
+#introScreen{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:linear-gradient(135deg,#ff6f61,#64b5f6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  animation:fadeBg 6s infinite alternate;
+}
+
+.intro-box{
+  width:90%;
+  max-width:420px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(15px);
+  padding:35px;
+  border-radius:25px;
+  text-align:center;
+  color:white;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  animation:zoomIn 1s ease;
+}
+
+.intro-box h1{
+  margin-bottom:10px;
+}
+
+.intro-box p{
+  margin-bottom:20px;
+}
+
+.intro-box input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:12px;
+  outline:none;
+  font-size:16px;
+}
+
+.intro-box button{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  background:white;
+  color:#ff6f61;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+  transition:0.3s;
+}
+
+.intro-box button:hover{
+  transform:scale(1.05);
+}
+
+@keyframes zoomIn{
+  from{
+    opacity:0;
+    transform:scale(0.7);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes fadeBg{
+  from{
+    background:linear-gradient(135deg,#ff6f61,#64b5f6);
+  }
+  to{
+    background:linear-gradient(135deg,#7b1fa2,#00acc1);
+  }
+}
   </style>
 </head>
 
 <body>
+
+<!-- INTRO SCREEN -->
+<div id="introScreen">
+  <div class="intro-box">
+    <h1>Welcome to India Heritage</h1>
+    <p>Please enter your details</p>
+    <input type="text" id="userName" placeholder="Your Name">
+    <input type="text" id="userClass" placeholder="Your Class">
+    <input type="text" id="userLocation" placeholder="Your Location">
+    <button onclick="enterWebsite()">Enter Website</button>
+  </div>
+</div>
+
 
   <!-- NAVBAR -->
 
@@ -466,8 +557,6 @@
 </p>
 </div>
   </div>
-
-
   <!-- GALLERY -->
 
   <h1 class="title" id="gallery">Photo Gallery</h1>
@@ -583,7 +672,26 @@
 
     }
 
-  </script>
+  
+function enterWebsite(){
+
+  const name = document.getElementById("userName").value.trim();
+  const userClass = document.getElementById("userClass").value.trim();
+  const location = document.getElementById("userLocation").value.trim();
+
+  if(name === "" || userClass === "" || location === ""){
+    alert("Please fill all details");
+    return;
+  }
+
+  document.getElementById("introScreen").style.opacity = "0";
+
+  setTimeout(()=>{
+    document.getElementById("introScreen").style.display = "none";
+  },600);
+}
+
+</script>
 
 </body>
 </html>
